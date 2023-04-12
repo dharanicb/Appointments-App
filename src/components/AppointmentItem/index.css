@@ -1,0 +1,45 @@
+/* Write your CSS here */
+.flex-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.favorite-icon-container {
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
+}
+.list-item-container {
+  border-width: 2px;
+  border-radius: 8px;
+  padding-top: 5px;
+  border-color: #b5b7c4;
+  height: 100px;
+  width: 350px;
+  list-style-type: none;
+  border-style: solid;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  margin: 16px;
+}
+.name {
+  color: #171f46;
+  font-family: 'Roboto';
+  font-size: 23px;
+  margin-left: 5px;
+}
+.date {
+  color: #b5b7c4;
+  font-family: 'Roboto';
+  font-size: 18px;
+  margin-left: 5px;
+}
+.favorite-icon {
+  background: transparent;
+  margin-right: 24px;
+  align-self: center;
+  border: none;
+  outline: none;
+}
