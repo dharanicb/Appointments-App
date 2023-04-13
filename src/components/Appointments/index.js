@@ -31,6 +31,7 @@ class Appointments extends Component {
       name,
       date,
       isFavorite: false,
+      isActive: false,
     }
 
     this.setState(prevState => ({
@@ -54,15 +55,25 @@ class Appointments extends Component {
 
   onClickStarred = () => {
     const {appointmentList} = this.state
-    const {id} = appointmentList
-    const isCheckedFavorite = appointmentList.filter(eachContact => {
-      if (id === eachContact.id) {
+    const {id, isActive} = appointmentList
+    this.setState(prevState => ({
+      appointmentList: prevState.appointmentList.map(eachContact => {
+        if (id === eachContact.id) {
+          //   eachContact.isFavorite = !eachContact.isFavorite
+          return {...eachContact, isActive: !eachContact.isFavorite}
+        }
+        return eachContact
+      }),
+    }))
+
+    appointmentList.filter(eachContact => {
+      //  key = {eachContact.id}
+      if (isActive === eachContact.isFavorite) {
         //   eachContact.isFavorite = !eachContact.isFavorite
         return this.renderAppointmentList()
       }
       return eachContact
     })
-    return isCheckedFavorite
   }
 
   toggleIsFavorite = id => {
@@ -79,8 +90,8 @@ class Appointments extends Component {
 
   render() {
     const {name, date, appointmentList} = this.state
-    const {isFavorite} = appointmentList
-    const {isCheckedFavorite} = this.onClickStarred
+    const {isActive} = appointmentList
+    // const {isCheckedFavorite} = this.onClickStarred
 
     return (
       <div className="container">
@@ -139,7 +150,7 @@ class Appointments extends Component {
             </button>
           </div>
           <ul className="comments-list">
-            {isFavorite ? isCheckedFavorite : this.renderAppointmentList()}
+            {isActive ? this.onClickStarred() : this.renderAppointmentList()}
           </ul>
         </div>
       </div>
