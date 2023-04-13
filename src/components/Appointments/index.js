@@ -55,7 +55,7 @@ class Appointments extends Component {
   onClickStarred = () => {
     const {appointmentList} = this.state
     const {id} = appointmentList
-    const isCheckedFavorite = appointmentList.map(eachContact => {
+    const isCheckedFavorite = appointmentList.filter(eachContact => {
       if (id === eachContact.id) {
         //   eachContact.isFavorite = !eachContact.isFavorite
         return this.renderAppointmentList()
@@ -115,7 +115,7 @@ class Appointments extends Component {
                   onChange={this.onChangeDateInput}
                 />
                 <br />
-                <button type="submit" data-testid="star" className="add-button">
+                <button type="submit" className="add-button">
                   Add
                 </button>
               </form>

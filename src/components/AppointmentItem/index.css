@@ -35,6 +35,7 @@
   font-family: 'Roboto';
   font-size: 18px;
   margin-left: 5px;
+  padding-bottom: 5px;
 }
 .favorite-icon {
   background: transparent;
@@ -42,4 +43,9 @@
   align-self: center;
   border: none;
   outline: none;
+}
+@media screen and (max-width: 576px) {
+  .list-item-container {
+    height: 150px;
+  }
 }
