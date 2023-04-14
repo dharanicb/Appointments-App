@@ -8,7 +8,12 @@ import AppointmentItem from '../AppointmentItem'
 import './index.css'
 
 class Appointments extends Component {
-  state = {name: '', date: new Date(), appointmentList: []}
+  state = {
+    name: '',
+    date: new Date(),
+    appointmentList: [],
+    isFilterActive: false,
+  }
 
   onChangeNameInput = event => {
     this.setState({
@@ -31,7 +36,6 @@ class Appointments extends Component {
       name,
       date,
       isFavorite: false,
-      isActive: false,
     }
 
     this.setState(prevState => ({
@@ -42,9 +46,14 @@ class Appointments extends Component {
   }
 
   renderAppointmentList = () => {
-    const {appointmentList} = this.state
-
-    return appointmentList.map(eachComment => (
+    const {appointmentList, isFilterActive} = this.state
+    let updatedData = appointmentList
+    if (isFilterActive) {
+      updatedData = appointmentList.filter(
+        eachTransaction => eachTransaction.isFavorite === true,
+      )
+    }
+    return updatedData.map(eachComment => (
       <AppointmentItem
         key={eachComment.id}
         appointmentDetails={eachComment}
@@ -54,25 +63,10 @@ class Appointments extends Component {
   }
 
   onClickStarred = () => {
-    const {appointmentList} = this.state
-    const {id, isActive} = appointmentList
-    this.setState(prevState => ({
-      appointmentList: prevState.appointmentList.map(eachContact => {
-        if (id === eachContact.id) {
-          //   eachContact.isFavorite = !eachContact.isFavorite
-          return {...eachContact, isActive: !eachContact.isFavorite}
-        }
-        return eachContact
-      }),
-    }))
+    const {isFilterActive} = this.state
 
-    appointmentList.filter(eachContact => {
-      //  key = {eachContact.id}
-      if (isActive === eachContact.isFavorite) {
-        //   eachContact.isFavorite = !eachContact.isFavorite
-        return this.renderAppointmentList()
-      }
-      return eachContact
+    this.setState({
+      isFilterActive: !isFilterActive,
     })
   }
 
@@ -89,8 +83,8 @@ class Appointments extends Component {
   }
 
   render() {
-    const {name, date, appointmentList} = this.state
-    const {isActive} = appointmentList
+    const {name, date} = this.state
+    // const {isActive} = appointmentList
     // const {isCheckedFavorite} = this.onClickStarred
 
     return (
@@ -144,14 +138,11 @@ class Appointments extends Component {
               type="button"
               className="star-button"
               onClick={this.onClickStarred}
-              data-testid="star"
             >
               Starred
             </button>
           </div>
-          <ul className="comments-list">
-            {isActive ? this.onClickStarred() : this.renderAppointmentList()}
-          </ul>
+          <ul className="comments-list">{this.renderAppointmentList()}</ul>
         </div>
       </div>
     )
