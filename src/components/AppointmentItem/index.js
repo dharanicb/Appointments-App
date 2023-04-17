@@ -8,8 +8,8 @@ const AppointmentItem = props => {
   const {id, name, date, isFavorite} = appointmentDetails
 
   const starImgUrl = isFavorite
-    ? 'https://assets.ccbp.in/frontend/react-js/star-filled-img.png'
-    : 'https://assets.ccbp.in/frontend/react-js/star-outline-img.png'
+    ? 'https://assets.ccbp.in/frontend/react-js/appointments-app/filled-star-img.png'
+    : 'https://assets.ccbp.in/frontend/react-js/appointments-app/star-img.png'
 
   const onClickFavoriteIcon = () => {
     toggleIsFavorite(id)
